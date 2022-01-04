@@ -1,0 +1,22 @@
+<% provide(:title, "新規商品") %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2 class="my-5">商品新規登録</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-7 px-sm-0 mx-auto mb-5">
+       <%= form_with model: @item, url: admin_items_path, method: :post, local: true do |f| %>
+         <table>
+            <%= render 'new', f: f %>
+           <tr>
+             <div class="form-action">
+               <th><%= f.submit :新規登録, class: 'btn btn-lg btn btn-success' %></th>
+             </div>
+           </tr>
+         </table>
+       <% end %>
+    </div>
+  </div>
+</div>
