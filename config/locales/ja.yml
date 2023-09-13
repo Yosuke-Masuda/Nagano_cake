@@ -1,0 +1,36 @@
+ja:
+  activerecord:
+    # モデル名
+    models:
+      address:
+      customer:
+    # モデルごとの属性
+    attributes:
+      address:
+        postal_code: 郵便番号 #変換後の日本語を記入
+        address: 住所 #変換後の日本語を記入
+        name: 宛名 #変換後の日本語を記入
+
+      customer:
+        last_name: 名前の(姓)
+        first_name: 名前の(名)
+        last_name_kana: 苗字のカナ
+        first_name_kana: 下の名前のカナ
+        postal_code: 郵便番号
+        address: 住所
+        phone_number: 携帯番号
+        password: パスワード
+        email: メールアドレス
+
+  # 全モデル共通の属性
+  attributes:
+    created_at: 作成日時
+    updated_at: 更新日時
+
+  views:
+    pagination:
+      first:  <i class= "fas fa-angle-double-left"></i>
+      last:  <i class= "fas fa-angle-double-right"></i>
+      previous:  <i class= "fas fa-angle-left"></i>
+      next:  <i class= "fas fa-angle-right"></i>
+      truncate: "..."

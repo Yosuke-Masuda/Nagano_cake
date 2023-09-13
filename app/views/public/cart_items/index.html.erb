@@ -1,0 +1,82 @@
+<div class="container">
+   <div class="row mb-2">
+      
+        <h4 class="mb-4 text-color col-3 text-center pt-4 rounded-pill">ショッピングカート</h4>
+        <div class="col-8 cart_image offset-1"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="text-right mb-1">
+          <%= link_to 'カートを空にする', destroy_all_cart_items_path, method: :delete, class:'btn btn-danger button mb-1' %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-color">
+                <th>商品名</th>
+                <th>単価(税込)</th>
+                <th>数量</th>
+                <th>小計</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @sum = 0 %>
+              <% @cart_items.each do |cart_item| %>
+                <tr>
+                  <td>
+                    <%= attachment_image_tag cart_item.item, :image, size:"60x50", fallback: "no_image.jpg" %>
+                    <%= cart_item.item.name %>
+                  </td>
+                  <td>
+                    <% with_tax = cart_item.item.with_tax_price %>
+                      <%= with_tax.to_s(:delimited) %>
+                  </td>
+                  <td>
+                    <%= form_with model:cart_item, local:true do |f|%>
+                      <%= f.select :amount, options_for_select((1..10).to_a, selected:cart_item.amount) %>
+                      <%= f.submit '変更', class:"btn btn-success btn-sm" %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% @subtotal = with_tax * cart_item.amount %>
+                    <%= @subtotal.to_s(:delimited) %>
+                  </td>
+                  <td>
+                    <%= link_to "削除する", cart_item_path(cart_item), method: :delete, class:"btn btn-sm btn-danger" %>
+                  </td>
+                </tr>
+                <% @sum += @subtotal %>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+   </div>
+
+   <div class = "row">
+     <div class = "col">
+       <%= link_to '買い物を続ける', root_path, class:'btn btn-primary' %>
+       <table align="right" class="table table-bordered col-2">
+        <tr>
+          <td class="table-color">合計金額</td>
+          <td>
+            ¥<%= @sum.to_s(:delimited) %>
+          </td>
+        </tr>
+      </table>
+     </div>
+   </div>
+
+   <div class = "row">
+     <div class = "col text-center">
+      <% if @cart_items.present? %>
+       <%= link_to '情報入力に進む', new_order_path, class:'btn btn-success btn-sm' %>
+      <% end %> 
+     </div>
+   </div>
+
+ </div>
