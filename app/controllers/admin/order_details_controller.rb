@@ -1,4 +1,6 @@
 class Admin::OrderDetailsController < ApplicationController
+  before_action :authenticate_admin!
+
 
 
   def update
@@ -15,13 +17,13 @@ class Admin::OrderDetailsController < ApplicationController
     end
 
     #注文個数と制作完了になっている個数が同じなら
-    if @order.order_details.count == @order.order_details.where(making_status: 3).amount
+    if @order.order_details.count == @order.order_details.where(making_status: 3).count
       @order.update(status: 3)
-      flash[:notice] = "制作ステータスの更新をしました。"
+      #flash[:notice] = "制作ステータスの更新をしました。"
       @order.save
     end
 
-    redirect_to request.referer
+    redirect_to admin_order_path(params[:order_id])
   end
 
   private

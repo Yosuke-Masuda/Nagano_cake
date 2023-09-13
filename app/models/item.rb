@@ -1,10 +1,19 @@
 class Item < ApplicationRecord
-    belongs_to :genre
-    has_many :order_details, dependent: :destroy
-    has_many :orders, through: :order_details
     
     attachment :image
-    
-    validates :genre_id, :name, :price, :introduction, presence: true
-    validates :image, presence: true
+    has_many :cart_items, dependent: :destroy
+    has_many :order_details, dependent: :destroy
+    has_many :orders, through: :order_details
+    belongs_to :genre, class_name: 'Genre', foreign_key: 'genre_id'
+
+    validates :name, presence: true
+    validates :introduction, presence: true
+    validates :price, presence: true
+    validates :is_active, presence: true
+    validates :genre, presence: true
+ 
+     def with_tax_price
+      (price * 1.1).floor
+     end
+  
 end

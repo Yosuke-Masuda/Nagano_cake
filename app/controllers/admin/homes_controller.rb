@@ -1,4 +1,6 @@
 class Admin::HomesController < ApplicationController
+  before_action :authenticate_admin!
+
   def top
     if params[:customers_id]
       #遷移してきたIDをwhereで取得

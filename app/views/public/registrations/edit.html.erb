@@ -4,6 +4,7 @@
       <h2 class="mb-5 text-color col-3 text-center">会員情報編集</h2>
 
         <%= form_for(resource, as: resource_name, url: customer_registration_path, html: { method: :patch }) do |f| %>
+        　<%= render 'layouts/error_message', model: f.object %>
 
           <div class="field mb-1">
             <%= f.label :"名前　　　　　　　　　　", class: 'col-3' %>
@@ -28,7 +29,7 @@
           
           <div class="field mb-1">
             <%= f.label :"郵便番号", class: 'col-3' %>
-            <%= f.text_field :postcode, autofocus: true, class: 'rounded', placeholder: "0000000" %>
+            <%= f.text_field :postal_code, autofocus: true, class: 'rounded', placeholder: "0000000" %>
           </div>
           
           <div class="field mb-1">
