@@ -7,10 +7,12 @@
         <div class="card-img-overlay d-flex">
           <%= flash[:alert] %>
           <p class="card-text align-self-center mx-auto font-weight-bold h5" id="top-text">
+            <span class="text-white bg-dark">
             ようこそ、ながのCAKEへ！<br>
             このサイトは、ケーキ販売のECサイトになります。<br>
             会員でない方も商品の閲覧はできますが、<br>
             購入には会員登録が必要になります。<br>
+            </span>
           </p>
 
 
@@ -42,6 +44,8 @@
     <% end %>
   </div>
   <div>
-    <%= link_to "全ての商品を見る>", items_path, class: "btn-primary font-weight-bold" %> 
+    <p class="text-right">
+     <%= link_to "全ての商品を見る>", items_path, class: "btn-primary font-weight-bold " %>
+    </p>
   </div>
 </div>
