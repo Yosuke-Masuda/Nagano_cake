@@ -19,11 +19,12 @@
               <% @cart_items.each do |cart_item| %>
               <tr>
                   <td><%= cart_item.item.name  %></td>
-                  <td><%= cart_item.item.with_tax_price %></td>
+                  <td>¥<%= cart_item.item.with_tax_price %></td>
                   <td><%= cart_item.amount %></td>
-                  <td><%= cart_item.item.with_tax_price * cart_item.amount %></td>
+                  <td>¥<% @sum += cart_item.item.with_tax_price * cart_item.amount %>
+                       <%= @sum.to_s(:delimited) %>
+                  </td>
               </tr>
-              <% @sum += cart_item.item.with_tax_price * cart_item.amount %>
               <% end %>
             </tbody>
            </table>
@@ -31,15 +32,16 @@
            <table class="table table-bordered border-dark col-2 mb-3 ml-5 h-75">
               <tr>
                   <th class="table-active">送料</th>
-                  <td><%= @order.shipping_cost %></td>
+                  <td>¥<%= @order.shipping_cost %></td>
               </tr>
               <tr>
                   <th class="table-active table-color">商品合計</th>
-                  <td><%= @sum %></td>
+                  <td>¥<%= @sum.to_s(:delimited, delimiter:',') %></td>
               </tr>
               <tr>
                   <th class="table-active">請求金額</th>
-                  <td><%= @order.shipping_cost + @sum %></td>
+                  <td>¥<% @order_details = @order.shipping_cost + @sum %>
+                       <%= @order_details.to_s(:delimited) %></td>
               </tr>
            </table>
         </div>
@@ -54,7 +56,7 @@
 
           <div class="address_info row mb-3">
               <h5 class="font-weight-bold">お届け先　　</h5>
-              <span>〒</span><%= current_customer.postal_code %><br><%= current_customer.address %><br><%= current_customer.last_name %>&nbsp;<%= current_customer.first_name %>
+              <span>〒</span><%= current_customer.postal_code.to_s.insert(3,"-") %><br><%= current_customer.address %><br><%= current_customer.last_name %>&nbsp;<%= current_customer.first_name %>
               <br>
           </div>
           
