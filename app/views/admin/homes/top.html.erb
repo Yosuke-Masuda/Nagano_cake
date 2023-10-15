@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-7">
+  　　<div class="admin-heading col-7">
+    　　<h4>注文履歴一覧</h4>
+  　　</div>
+  　　<div class="col-8"></div>
+　　</div>
+    <div class="col-12 mx-auto">
+      <table class="table table-hover rounded-top rounded-bottom table_border_radius admin-order-table">
+        <thead class="thead-dark">
+          <div class="row table-row">
+           <div class="col-8 mx-auto">
+            <table class="table">
+             <thead class="thead-light">
+              <tr>        
+                <th>購入日時</th>
+                <th>購入者</th>
+                <th>注文個数</th>
+                <th>注文ステータス</th>
+              </tr>
+        </thead>
+        <tbody>
+           <% @orders.each do |order| %>
+           <tr>
+             <td><%= link_to "#{order.created_at.strftime('%Y/%m/%d %H:%M:%S')}", admin_order_path(order.id), class: "text-dark border-bottom border-dark" %></td>
+             <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+             <td><%= order.order_details.sum(:amount) %></td>
+             <td><%= order.status %></td>
+           </tr>
+           <% end %>
+        </tbody>
+      </table>
+      <%= paginate @orders %>
+    </div>
+  </div>
+</div>

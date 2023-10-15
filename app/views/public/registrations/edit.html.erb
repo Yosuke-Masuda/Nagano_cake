@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="mb-5 text-color col-3 text-center">会員情報編集</h2>
+
+        <%= form_for(resource, as: resource_name, url: customer_registration_path, html: { method: :patch }) do |f| %>
+        　<%= render 'layouts/error_message', model: f.object %>
+
+          <div class="field mb-1">
+            <%= f.label :"名前　　　　　　　　　　", class: 'col-3' %>
+            
+            <%= f.text_field :last_name, autofocus: true, class: 'rounded', placeholder: "令和" %>
+            <%= f.label :"　 　", class: '' %>
+            <%= f.text_field :first_name, autofocus: true, class: 'rounded', placeholder: "道子" %>
+          </div>
+          
+          <div class="field mb-1">
+            <%= f.label :"フリガナ　　　　　　　　　", class: 'col-3' %>
+            
+            <%= f.text_field :last_name_kana, autofocus: true, class: 'rounded', placeholder: "レイワ" %>
+            <%= f.label :"　  　", class: '' %>
+            <%= f.text_field :first_name_kana, autofocus: true, class: 'rounded', placeholder: "ミチコ" %>
+          </div>
+        
+          <div class="field mb-1">
+            <%= f.label :"メールアドレス", class: 'col-3' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'rounded', placeholder: "sample@examle.com" %>
+          </div>
+          
+          <div class="field mb-1">
+            <%= f.label :"郵便番号", class: 'col-3' %>
+            <%= f.text_field :postal_code, autofocus: true, class: 'rounded', placeholder: "0000000" %>
+          </div>
+          
+          <div class="field mb-1">
+            <%= f.label :"住所", class: 'col-3' %>
+            <%= f.text_field :address, autofocus: true, class: 'rounded', placeholder: "東京都渋谷区代々木神園町0-0" %>
+          </div>
+          
+          <div class="field mb-1">
+            <%= f.label :"電話番号", class: 'col-3' %>
+            <%= f.text_field :phone_number, autofocus: true, class: 'rounded', placeholder: "00000000000" %>
+          </div>
+        
+        
+          <div class="actions">
+            <%= f.label :"　", class: 'col-3' %>
+            <%= f.submit "編集内容を保存する", class: 'btn btn-success col-2' %>
+            <%= link_to '退会する', customers_unsubscribe_path, class:'btn btn-danger ml-5' %>
+          </div>
+        <% end %>
+        
+      
+        
+    </div>
+  </div>
+</div>
