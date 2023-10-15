@@ -4,8 +4,10 @@ class ApplicationController < ActionController::Base
    def after_sign_in_path_for(resource)
      case resource
      when Admin
+       flash[:notice] = "ログインに成功しました"
        admin_root_path
      when Customer
+       flash[:notice] = "ログインに成功しました"
        root_path
      end
    end
